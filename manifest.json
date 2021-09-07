@@ -1,0 +1,17 @@
+{
+	"name": "Typeracer premium UI",
+	"version": "0.0.1",
+	"description": "Changes UI to look like premium account",
+	"content_scripts": [
+		{
+			"matches": ["*://play.typeracer.com"],
+			"js": ["contentScript.js"]
+		}
+	],
+	"permissions": ["storage", "tabs"],
+	"browser_action": {
+		"default_icon": "image/icon.png",
+		"default_popup": "popup.html"
+	},
+	"manifest_version": 2
+}
