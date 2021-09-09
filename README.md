@@ -1,5 +1,5 @@
 # Typeracer premium account UI
-![](?raw=true)
+![](https://github.com/Hereugo/typeracer-premium-account-UI/blob/main/images/image.png?raw=true)
 
 This is a chrome extension changes UI of typeracer to make your account look like a premium account.
 
