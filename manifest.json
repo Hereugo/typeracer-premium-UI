@@ -4,8 +4,8 @@
 	"description": "Changes UI to look like premium account",
 	"content_scripts": [
 		{
-			"matches": ["*://play.typeracer.com"],
-			"js": ["./contentScript.js"]
+			"matches": ["*://play.typeracer.com/*"],
+			"js": ["contentScript.js"]
 		}
 	],
 	"permissions": ["storage", "tabs"],

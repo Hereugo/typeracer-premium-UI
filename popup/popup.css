@@ -1,0 +1,38 @@
+#image-container {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#profileImg {
+    max-width: 107px;
+    max-height: 107px;
+    border-radius: 5px;
+    margin-bottom: 0.25rem; 
+}
+
+#button-container {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    width: 80%;
+    justify-content: flex-end;
+}
+button {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    width: fit-content;
+    border: none;
+    margin-left: 0.5rem;
+
+    cursor: pointer;
+}
+#cancel {
+    background-color: #f44336;
+    color: white;
+}
+#submit {
+    background-color: #00a8ff;
+    color: white;
+}
