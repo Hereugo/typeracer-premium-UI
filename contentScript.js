@@ -80,4 +80,30 @@ async function onSiteLoad(callback, tryCount = 0, maxTryCount = 20) {
     popupQueries();
     await onSiteLoad(imageChange);
     await onSiteLoad(addRemover);
+
+
+    var callback = (record) => {
+        try {
+            console.log('mutation occruded!');
+            let imgContainer = document.querySelector("body > div.DialogBox.PlayerInfoPopup.trPopupDialog > div > div > div.dialogContent > table > tbody > tr:nth-child(2) > td > table > tbody > tr > td:nth-child(1) > img")            
+            imgContainer.style.display = 'block';
+            imgContainer.style.width = '150px';
+            imgContainer.style.height = '150px';
+
+            chrome.storage.local.get(null, function(result) {
+                imgContainer.src = result['src'];
+            });
+            return 'success';
+        }
+        catch(e) {
+            return 'error';
+        }
+    }
+      
+    var observer = new MutationObserver(callback);
+    var config =  {
+        characterData: true,
+        childList: true
+    };
+    observer.observe(document.querySelector('body'), config);
 })();
