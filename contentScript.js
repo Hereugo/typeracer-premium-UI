@@ -16,10 +16,11 @@ function addRemover() {
     }
 }
 
-function imageChange() {
-    let profile = document.querySelector("#userInfo > div > div.profilePicContainer");
-    profile.innerHTML = "";
-    chrome.storage.sync.get(null, function(result) {
+function getImageTag() {
+    let img = document.querySelector("#userInfo > div > div.profilePicContainer > img");
+    if (img.classList.contains("profilePic")) {
+        let profile = img.parentNode
+        profile.innerHTML = "";
         html = `
             <img
                 style="
@@ -28,23 +29,32 @@ function imageChange() {
                     border-top-left-radius: 5px;
                     border-bottom-left-radius: 5px;
                 " 
-                src="${result['src']}" 
+                src="" 
                 alt="profile"/>
         `
         profile.insertAdjacentHTML('beforeend', html);
+        return getImageTag()
+    }
+    return img;
+}
+
+function imageChange() {
+    let img = getImageTag()
+    chrome.storage.sync.get(null, function(result) {
+        img.src = result['src'];
     });
     return 'success';
 }
 
 function popupQueries() {
-    chrome.runtime.onMessage.addListener(async function(request, sender, sendResponse) {
+    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         console.log("hello: ", request);
         switch(request.data) {
             case 'save-img': {
                 chrome.storage.sync.set({'src': request.src}, null);
                 
                 sendResponse({
-                    data: await imageChange()
+                    data: imageChange()
                 });
             }
         }

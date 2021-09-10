@@ -1,6 +1,9 @@
 function validURI(uri) {
     return /data:image\/jpeg|png|jpg;base64/.test(uri);
 }
+function validSize(width, height) {
+    return width == 107 && height == 107;
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('input[type="file"]').addEventListener('change', function() {
@@ -18,17 +21,24 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector("#submit").addEventListener('click', function() {
             let img = document.querySelector('#profileImg');
 
-            if (validURI(img.src)) {
-                chrome.tabs.sendMessage(tabs[0].id, {data: 'save-img', src: img.src}, function(response) {
-                    if (response != undefined && response.data == 'success') {
-                        window.close();
-                    } else {
-                        alert('Error!');
-                    }
-                });
-            } else {
-                alert('Error!');
+            
+            if (!validURI(img.src) ) {
+                alert('Error!\n Invalid URI');
+                return;
             }
+            if (!validSize(img.clientWidth, img.clientHeight)) {
+                alert('Error!\nOnly images with width 107px and height 107px are allowed');
+                return;
+            }
+
+            chrome.tabs.sendMessage(tabs[0].id, {data: 'save-img', src: img.src}, function(response) {
+                if (response != undefined && response.data == 'success') {
+                    window.close();
+                } else {
+                    alert('Error!\nConnection was not established');
+                }
+            });
+
         }, false);
 	});
 
