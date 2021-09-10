@@ -26,10 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Error!\n Invalid URI');
                 return;
             }
-            if (!validSize(img.clientWidth, img.clientHeight)) {
-                alert('Error!\nOnly images with width 107px and height 107px are allowed');
-                return;
-            }
+            // if (!validSize(img.clientWidth, img.clientHeight)) {
+            //     alert('Error!\nOnly images with width 107px and height 107px are allowed');
+            //     return;
+            // }
 
             chrome.tabs.sendMessage(tabs[0].id, {data: 'save-img', src: img.src}, function(response) {
                 if (response != undefined && response.data == 'success') {

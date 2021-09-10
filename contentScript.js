@@ -3,8 +3,8 @@ function sleep(ms) {
 }
 
 function initStorage() {
-    chrome.storage.sync.get(null, function(result) {
-        if (!result['src']) chrome.storage.sync.set({'src': ""}, null);
+    chrome.storage.local.get(null, function(result) {
+        if (!result['src']) chrome.storage.local.set({'src': ""}, null);
     });
 }
 
@@ -40,7 +40,7 @@ function getImageTag() {
 
 function imageChange() {
     let img = getImageTag()
-    chrome.storage.sync.get(null, function(result) {
+    chrome.storage.local.get(null, function(result) {
         img.src = result['src'];
     });
     return 'success';
@@ -51,7 +51,7 @@ function popupQueries() {
         console.log("hello: ", request);
         switch(request.data) {
             case 'save-img': {
-                chrome.storage.sync.set({'src': request.src}, null);
+                chrome.storage.local.set({'src': request.src}, null);
                 
                 sendResponse({
                     data: imageChange()
