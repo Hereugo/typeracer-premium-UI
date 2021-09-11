@@ -10,7 +10,7 @@
 	],
 	"permissions": ["storage", "tabs"],
 	"browser_action": {
-		"default_icon": "images/favicon.png",
+		"default_icon": "images/icon.png",
 		"default_popup": "popup/popup.html"
 	},
 	"manifest_version": 2
