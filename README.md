@@ -20,6 +20,6 @@ If you found yourself in the list then you might enjoy this extension.
 # Easy to use!
 * Install the extension from the link above, once installed pin it to the list of extensions. 
 * Now goto typeracer.com, and click the extension
-* Upload any image lower than 5 KB with ratios 1:1. And click save.
+* Upload any image lower than 5 MB with ratios 1:1 (optional, but the image will look bad if not). And click save.
 * Now the image should have changed to your image
 * Enjoy!
