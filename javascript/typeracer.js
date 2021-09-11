@@ -66,7 +66,7 @@ class Profile {
         return 'success';
     }
 }
-class ProfilePopup {
+class ProfilePopup extends Profile {
     static init() {
         ProfilePopup.initImage(150, 150);
     }
@@ -74,7 +74,13 @@ class ProfilePopup {
         var observer = new MutationObserver((record) => {
             try {
                 console.log('mutation occruded!');
+
+                if (!ProfilePopup.isOwner()) {
+                    return 'not owner';
+                }
+
                 let imgContainer = ProfilePopup.getPopupImage();
+
                 imgContainer.style.display = 'block';
                 imgContainer.style.width = `${width}px`;
                 imgContainer.style.height = `${height}px`;
@@ -96,5 +102,12 @@ class ProfilePopup {
         let selector = "body > div.DialogBox.PlayerInfoPopup.trPopupDialog > div > div > div.dialogContent > table > tbody > tr:nth-child(2) > td > table > tbody > tr > td:nth-child(1) > img";
         let img = document.querySelector(selector);
         return img;
+    }
+    static isOwner() {
+        let selector1 = "body > div.DialogBox.PlayerInfoPopup.trPopupDialog > div > div > div.dialogContent > table > tbody > tr:nth-child(1) > td > table > tbody > tr > td:nth-child(1) > div > a:nth-child(3)"
+        let selector2 = "body > div.DialogBox.PlayerInfoPopup.trPopupDialog > div > div > div.dialogContent > table > tbody > tr:nth-child(1) > td > table > tbody > tr > td:nth-child(1) > div > a:nth-child(2)"
+        let link1 = document.querySelector(selector1);
+        let link2 = document.querySelector(selector2);
+        return (link1.style.display == 'none' && link2.style.display != 'none');
     }
 }

@@ -4,14 +4,6 @@ function initStorage() {
     });
 }
 
-function adsRemover() {
-    let adContainers = document.querySelectorAll('.AdContainer');
-    for (let i = 0; i < adContainers.length; i++) {
-        let ad = adContainers[i];
-        ad.remove();
-    }
-}
-
 function popupQueries() {
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         console.log("hello: ", request);
