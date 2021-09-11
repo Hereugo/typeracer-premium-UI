@@ -5,7 +5,7 @@
 	"content_scripts": [
 		{
 			"matches": ["*://play.typeracer.com/*"],
-			"js": ["contentScript.js"]
+			"js": ["javascript/general.js", "javascript/typeracer.js", "javascript/contentScript.js"]
 		}
 	],
 	"permissions": ["storage", "tabs"],
