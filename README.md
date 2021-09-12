@@ -3,7 +3,7 @@
 
 This is a chrome extension changes UI of typeracer to make your account look like a premium account.
 
-Go by link to install it:
+Go by link to install it: https://chrome.google.com/webstore/detail/typeracer-premium-ui/chnlnfhfilgmkclladlkklihgimcpiip?hl=ru&authuser=0
 
 # Features
 * Set your profile image for free! 
