@@ -1,4 +1,3 @@
-![](https://github.com/Hereugo/typeracer-premium-account-UI/blob/main/images/header.jpeg?raw=true)
 # Typeracer premium account UI
 
 <p align="center">
@@ -15,3 +14,5 @@ This is a chrome extensions that allows you to modify your profile picture on **
 * Upload a new picture
 * Crop your new picture as you like
 * Click on "Set new profile picture" 
+
+![](https://github.com/Hereugo/typeracer-premium-account-UI/blob/main/images/header.jpeg?raw=true)
