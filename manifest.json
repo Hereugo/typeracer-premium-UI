@@ -1,11 +1,26 @@
 {
 	"name": "Typeracer premium UI",
-	"version": "0.1.0",
+	"version": "1.2.0",
 	"description": "Changes UI to look like premium account",
 	"content_scripts": [
 		{
 			"matches": ["*://play.typeracer.com/*"],
-			"js": ["javascript/general.js", "javascript/typeracer.js", "javascript/contentScript.js"]
+			"js": ["Libraries/cropperjs-main/src/js/constants.js",
+				"Libraries/cropperjs-main/src/js/utilities.js",
+				"Libraries/cropperjs-main/src/js/defaults.js",
+				"Libraries/cropperjs-main/src/js/template.js",
+				"Libraries/cropperjs-main/src/js/render.js",
+				"Libraries/cropperjs-main/src/js/preview.js",
+				"Libraries/cropperjs-main/src/js/events.js",
+				"Libraries/cropperjs-main/src/js/handlers.js",
+				"Libraries/cropperjs-main/src/js/change.js",
+				"Libraries/cropperjs-main/src/js/methods.js",
+				"Libraries/cropperjs-main/src/js/cropper.js",
+				   "Libraries/jquery/jquery-3.6.0.min.js", 
+				   "javascript/general.js", 
+				   "javascript/typeracer.js", 
+				   "javascript/contentScript.js"],
+			"css": ["css/styles.css", "Libraries/cropperjs-main/src/css/cropper.css"]
 		}
 	],
 	"permissions": ["storage", "tabs"],
@@ -13,5 +28,6 @@
 		"default_icon": "images/icon.png",
 		"default_popup": "popup/popup.html"
 	},
+	"web_accessible_resources": ["images/avatar.png"],
 	"manifest_version": 2
 }

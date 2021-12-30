@@ -1,38 +1,54 @@
-#image-container {
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-#profileImg {
-    max-width: 107px;
-    max-height: 107px;
-    border-radius: 5px;
-    margin-bottom: 0.25rem; 
+body {
+    margin: 0;
+    padding: 0;
+
+    background-color: #D0D7DC;
+
+    width: 325px;
+    max-width: 325px;
 }
 
-#button-container {
-    display: flex;
-    flex-direction: row;
-    margin-left: auto;
-    width: 80%;
-    justify-content: flex-end;
+main {
+    font-size: 14px;
+    font-family: 'Open-sans', sans-serif;
+    color: #24292f;
+
+    background-color: white;
+
+    padding: 0.25rem;
+    margin: 0.25rem;
 }
-button {
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    width: fit-content;
+
+hr {
     border: none;
-    margin-left: 0.5rem;
+    border-bottom: 2px solid #D0D7DC;
+}
 
-    cursor: pointer;
+.title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
 }
-#cancel {
-    background-color: #f44336;
-    color: white;
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    margin: 0.5rem 0;
 }
-#submit {
-    background-color: #00a8ff;
-    color: white;
+.item {
+    margin-right: 0.25rem;
+    
+    font-size: 0.8rem;
+
+    color: #D0D7DC;
+}
+
+.item svg {
+    fill: currentColor;
+}
+
+.item:hover {
+    color: #757a7e;
 }

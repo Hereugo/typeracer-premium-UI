@@ -11,7 +11,6 @@ class Typeracer {
     static async onSiteLoad(callback, tryCount = 0, maxTryCount = 20) {
         if (tryCount > maxTryCount) return 'error';
         try {
-            console.log("try function: ", callback);
             callback();
             return 'success';
         }
@@ -32,38 +31,51 @@ class Typeracer {
 
 class Profile {
     static init() {
-        Profile.initImage(107, 107);
+        Profile.initImage();
     }
-    static initImage(width, height) {
-        let img = Profile.getImage();
-        let profile = img.parentNode
+    static initImage() {
+        let profile = Profile.getImage().parentNode
+        
         profile.innerHTML = "";
+
         let html = `
-            <img
-                style="
-                    width: ${width}px;
-                    height: ${height}px;
-                    border-top-left-radius: 5px;
-                    border-bottom-left-radius: 5px;
-                " 
-                src="" 
-                alt="profile"/>
-        `
+            <div class="avatar-container">
+                <div class="edit-button">Upload a photo</div> 
+                <input type="file" style="display:none;" accept=".png,.jpeg,.jpg"/>
+                <img src=""/>
+            </div>`;
         profile.insertAdjacentHTML('beforeend', html);
-        Profile.updateImage();
+
+        document.querySelector(".edit-button").addEventListener("click", () => {
+            document.querySelector(".avatar-container input").click();
+        }, false);
+        document.querySelector(".avatar-container input").addEventListener("click", (_e) => {
+            _e.target.value = "";
+        }, false);
+        document.querySelector(".avatar-container input").addEventListener("change", (_e) => {
+            console.log(_e);
+            if (_e.target.files) {
+                document.querySelector('.box-main').style.visibility = 'visible';
+                var reader = new FileReader();
+                reader.onload = (e) => {
+                    cropper.replace(e.target.result);
+                };
+                reader.readAsDataURL(_e.target.files[0]);
+            }
+        }, false);
+
+        chrome.storage.local.get(null, function(result) {
+            Profile.updateImage(result['src']);
+        });
     }
     static getImage() {
-        let selector = "#userInfo > div > div.profilePicContainer > img";
+        let selector = "#userInfo div div.profilePicContainer img";
         let img = document.querySelector(selector);
         return img;
     }
-
-    static updateImage() {
+    static updateImage(src) {
         let img = Profile.getImage();
-        chrome.storage.local.get(null, function(result) {
-            img.src = result['src'];
-        });
-        return 'success';
+        img.src = src;
     }
 }
 class ProfilePopup extends Profile {

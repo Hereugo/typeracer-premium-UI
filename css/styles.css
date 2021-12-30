@@ -1,0 +1,144 @@
+:root {
+    --border-color: #D0D7DC;
+    --green-color: #2da44e;
+}
+
+.box-main {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(0, 0, 0, 0.4);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Open Sans', sans-serif;
+    font-weight: lighter;
+    font-size: 14px;
+    color: #24292f;
+
+    visibility: hidden;
+}
+
+.box-container {
+    width: 400px;
+    max-width: 400px;
+    height: auto;
+
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+
+    box-shadow: 0 0 18px rgb(0 0 0 / 40%);
+}
+
+.box-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.25rem;
+
+    background: rgba(235, 235, 235, 0.925);
+    border-bottom: 1px solid var(--border-color);
+}
+.box-title {
+    margin: 0;
+    padding: 0;
+}
+.close-button {
+    margin-left: auto;
+
+    border: none;
+    box-shadow: none;
+    background: none;
+    color: #24292f;
+
+    cursor: pointer;
+}
+.close-button svg {
+    fill: currentColor;
+}
+.close-button svg:hover {
+    fill: #0969da;
+}
+
+
+.box-content {
+    padding: 0.5rem 0.25rem;
+}
+.set-button {
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.25rem;
+
+    width: 100%;
+
+    border: none;
+    border-radius: 5px;
+
+    font-family: inherit;
+    font-weight: bold;
+    background: var(--green-color);
+    color: #fff;
+
+    cursor: pointer;
+}
+.set-button:hover {
+    background: #216e39;
+}
+
+#box-image {
+    display: block;
+
+    max-width: 100%;
+}
+
+
+
+
+.avatar-container {
+    position: relative;
+    font-family: "Open Sans", sans-serif;
+
+    width: 91px;
+    height: 91px;
+    max-width: 91px;
+    max-height: 91px;
+
+    cursor: pointer;
+}
+.avatar-container img {
+    width: 100%;
+    height: auto;
+
+    border-radius: 5px;
+}
+.edit-button {
+    border: none;
+
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    visibility: hidden;
+    transition: 50ms ease;
+
+    color: white;
+    font-size: 0.75rem;
+
+    border-radius: 5px;
+}
+.avatar-container:hover .edit-button {
+    background: rgba(0, 0, 0, 0.4);
+    visibility: visible;
+}
