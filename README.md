@@ -1,25 +1,17 @@
+![](https://github.com/Hereugo/typeracer-premium-account-UI/blob/main/images/header.jpeg?raw=true)
 # Typeracer premium account UI
-![](https://github.com/Hereugo/typeracer-premium-account-UI/blob/main/images/image.png?raw=true)
 
-This is a chrome extension changes UI of typeracer to make your account look like a premium account.
+<p align="center">
+  <img src="https://github.com/Hereugo/typeracer-premium-account-UI/blob/main/images/crop.jpeg?raw=true">
+</p>
 
-Go by link to install it: https://chrome.google.com/webstore/detail/typeracer-premium-ui/chnlnfhfilgmkclladlkklihgimcpiip?hl=ru&authuser=0
+This is a chrome extensions that allows you to modify your profile picture on **typeracer**.
 
-# Features
-* Set your profile image for free! 
-* Removes those annoying ads!
+**Installation link:** https://chrome.google.com/webstore/detail/typeracer-premium-ui/chnlnfhfilgmkclladlkklihgimcpiip?hl=ru&authuser=0
 
-# Why do I need this?
-> ## _Are you:_
-> * Normal typist who wants to look cool, but don't have the money to allow yourself a premium account? 
-> * Github user that randomly found this repo? (If yes please star it)
-> * All of the above
-
-If you found yourself in the list then you might enjoy this extension.
-
-# Easy to use!
-* Install the extension from the link above, once installed pin it to the list of extensions. 
-* Now goto typeracer.com, and click the extension
-* Upload any image lower than 5 MB with ratios 1:1 (optional, but the image will look bad if not). And click save.
-* Now the image should have changed to your image
-* Enjoy!
+# Setup / Instruction
+* Install the extension from this [link](https://chrome.google.com/webstore/detail/typeracer-premium-ui/chnlnfhfilgmkclladlkklihgimcpiip?hl=ru&authuser=0)
+* Goto [typeracer](https://typeracer.com), and click on the default avatar picture.
+* Upload a new picture
+* Crop your new picture as you like
+* Click on "Set new profile picture" 
