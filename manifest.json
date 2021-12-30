@@ -23,7 +23,7 @@
 			"css": ["css/styles.css", "Libraries/cropperjs-main/src/css/cropper.css"]
 		}
 	],
-	"permissions": ["storage", "tabs"],
+	"permissions": ["storage"],
 	"browser_action": {
 		"default_icon": "images/icon.png",
 		"default_popup": "popup/popup.html"
