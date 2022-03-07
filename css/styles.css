@@ -105,10 +105,10 @@
     position: relative;
     font-family: "Open Sans", sans-serif;
 
-    width: 91px;
-    height: 91px;
-    max-width: 91px;
-    max-height: 91px;
+    width: 45px;
+    height: 45px;
+    max-width: 45px;
+    max-height: 45px;
 
     cursor: pointer;
 }
@@ -141,4 +141,12 @@
 .avatar-container:hover .edit-button {
     background: rgba(0, 0, 0, 0.4);
     visibility: visible;
+}
+
+
+.pitstop-container h4 {
+    margin: 1rem 0;
+}
+.pitstop-container input {
+    margin-bottom: 1rem;
 }

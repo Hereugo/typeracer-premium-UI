@@ -1,125 +1,202 @@
-class Typeracer {
-    constructor() {
-        Typeracer.onSiteLoad(() => {
-            Profile.init();
-            ProfilePopup.init();
-
-            Typeracer.adsRemover();
-        })
-    }
-
-    static async onSiteLoad(callback, tryCount = 0, maxTryCount = 20) {
-        if (tryCount > maxTryCount) return 'error';
-        try {
-            callback();
-            return 'success';
-        }
-        catch(e) {
-            await sleep(100);
-            return await Typeracer.onSiteLoad(callback, tryCount + 1);
-        }
-    }
-
-    static adsRemover() {
-        let adContainers = document.querySelectorAll('.AdContainer');
-        for (let i = 0; i < adContainers.length; i++) {
-            let ad = adContainers[i];
-            ad.remove();
-        }
-    }
-}
-
 class Profile {
-    static init() {
-        Profile.initImage();
-    }
-    static initImage() {
-        let profile = Profile.getImage().parentNode
+    constructor () {
+        this.html = avatarHTML;
+        this.container = $(".userInfo .profilePicContainer");
         
-        profile.innerHTML = "";
+        this.injectHTML();
 
-        let html = `
-            <div class="avatar-container">
-                <div class="edit-button">Upload a photo</div> 
-                <input type="file" style="display:none;" accept=".png,.jpeg,.jpg"/>
-                <img src=""/>
-            </div>`;
-        profile.insertAdjacentHTML('beforeend', html);
+        this.profileImage = this.container.find('.avatar-container img');
+        this.width = "45px";
+        this.height = "45px";
 
-        document.querySelector(".edit-button").addEventListener("click", () => {
-            document.querySelector(".avatar-container input").click();
-        }, false);
-        document.querySelector(".avatar-container input").addEventListener("click", (_e) => {
-            _e.target.value = "";
-        }, false);
-        document.querySelector(".avatar-container input").addEventListener("change", (_e) => {
+        this.init();
+    }
+
+    injectHTML() {
+        this.container.html('');
+        this.container.append(this.html);
+    }
+
+    async init() {
+        $('.edit-button').click(() => { $('.avatar-container input').click() });
+        $('.avatar-container input').click((_e) => { _e.target.value = "" });
+        $('.avatar-container input').change((_e) => {
             console.log(_e);
             if (_e.target.files) {
-                document.querySelector('.box-main').style.visibility = 'visible';
+                editCard.show();
+                
                 var reader = new FileReader();
                 reader.onload = (e) => {
-                    cropper.replace(e.target.result);
+                    editCard.cropper.replace(e.target.result);
                 };
                 reader.readAsDataURL(_e.target.files[0]);
             }
-        }, false);
-
-        chrome.storage.local.get(null, function(result) {
-            Profile.updateImage(result['src']);
         });
+
+        this.update();
     }
-    static getImage() {
-        let selector = "#userInfo div div.profilePicContainer img";
-        let img = document.querySelector(selector);
-        return img;
+
+    async update() {
+        const { src } = await getStorageData(['src']); 
+
+        this.profileImage.attr('src', src);
     }
-    static updateImage(src) {
-        let img = Profile.getImage();
-        img.src = src;
+
+    getProfileName() {
+        return $('.userInfo .userNameLabel')[0].innerText;
     }
 }
-class ProfilePopup extends Profile {
-    static init() {
-        ProfilePopup.initImage(150, 150);
+
+class ProfilePopup {
+    constructor() {
+        this.width = "150px";
+        this.height = "150px";
+
+
+        this.setup();
     }
-    static initImage(width, height) {
-        var observer = new MutationObserver((record) => {
-            try {
-                console.log('mutation occruded!');
 
-                if (!ProfilePopup.isOwner()) {
-                    return 'not owner';
-                }
+    setup() {
+        var observer = new MutationObserver(this.open.bind(this));
 
-                let imgContainer = ProfilePopup.getPopupImage();
+        observer.observe($('body')[0], {
+            childList: true,
+        });
+    }
 
-                imgContainer.style.display = 'block';
-                imgContainer.style.width = `${width}px`;
-                imgContainer.style.height = `${height}px`;
+    async open() {
+        console.log("Popup opened");
+
+        if (!this.isOwner()) return;
     
-                chrome.storage.local.get(null, function(result) {
-                    imgContainer.src = result['src'];
-                });
-                return 'success';
-            }
-            catch(e) {
-                return 'error';
-            }
+        let img = this.getImage();
+        img.css({
+            width: this.width,
+            height: this.height,
+            display: 'block',
         });
-        observer.observe(document.querySelector('body'), {
-            childList: true
+
+        const { src } = await getStorageData(['src']); 
+        img.attr('src', src);
+    }
+
+    getImage() {
+        return $("body > div.DialogBox.PlayerInfoPopup.trPopupDialog > div > div > div.dialogContent > table > tbody > tr:nth-child(2) > td > table > tbody > tr > td:nth-child(1) > img");
+    }
+
+    isOwner() {
+        try {
+            let chk1 = $("body > div.DialogBox.PlayerInfoPopup.trPopupDialog > div > div > div.dialogContent > table > tbody > tr:nth-child(1) > td > table > tbody > tr > td:nth-child(1) > div > a:nth-child(3)")[0];
+            let chk2 = $("body > div.DialogBox.PlayerInfoPopup.trPopupDialog > div > div > div.dialogContent > table > tbody > tr:nth-child(1) > td > table > tbody > tr > td:nth-child(1) > div > a:nth-child(2)")[0];
+            return (chk1.style.display == 'none' && chk2.style.display != 'none');
+        }
+        catch(_e) {
+            return false;
+        }
+    }
+}
+
+class ProfilePitstop {
+    constructor() {
+        this.img = $(".user_profile_pic").filter(function (_index) {
+            let title = $(this).attr('title');
+            return title == profile.getProfileName() || title == "Your profile picture";
         });
+
+        console.log(this.img);
+        
+        this.container = $(".picControls");
+        this.html = pitstopHTML;
+
+        this.injectHTML();
+
+        this.init();
     }
-    static getPopupImage() {
-        let selector = "body > div.DialogBox.PlayerInfoPopup.trPopupDialog > div > div > div.dialogContent > table > tbody > tr:nth-child(2) > td > table > tbody > tr > td:nth-child(1) > img";
-        let img = document.querySelector(selector);
-        return img;
+
+    injectHTML() {
+        var link = window.location.href;
+        if (link == "https://data.typeracer.com/pit/edit_profile") {
+            this.container.html('');
+            this.container.append(this.html);
+        }
     }
-    static isOwner() {
-        let selector1 = "body > div.DialogBox.PlayerInfoPopup.trPopupDialog > div > div > div.dialogContent > table > tbody > tr:nth-child(1) > td > table > tbody > tr > td:nth-child(1) > div > a:nth-child(3)"
-        let selector2 = "body > div.DialogBox.PlayerInfoPopup.trPopupDialog > div > div > div.dialogContent > table > tbody > tr:nth-child(1) > td > table > tbody > tr > td:nth-child(1) > div > a:nth-child(2)"
-        let link1 = document.querySelector(selector1);
-        let link2 = document.querySelector(selector2);
-        return (link1.style.display == 'none' && link2.style.display != 'none');
+
+    async init() {
+        await this.update();
+
+        // Second way to update the profile pic
+        try {
+            $('.pitstop-container input').click((_e) => { _e.target.value = "" });
+            $('.pitstop-container input').change((async (_e) => {
+                console.log(_e);
+                if (_e.target.files) {
+                    editCard.show();
+                    
+                    var reader = new FileReader();
+                    reader.onload = (e) => {
+                        editCard.cropper.replace(e.target.result);
+                    };
+                    reader.readAsDataURL(_e.target.files[0]);
+                }
+            }).bind(this));
+        }
+        catch(_e) {
+            console.log(_e);
+        }
+    }
+
+    async update() {
+        const { src } = await getStorageData(['src']);
+        this.img.attr('src', src);
+    }
+}
+
+
+class EditCard {
+    constructor($parent) {
+        this.html = boxHTML;
+        this.injectHTML($parent);
+
+        this.img = $("#box-image");
+        this.card = $('.box-main');
+
+        this.cropper = new Cropper(this.img[0], {
+            viewMode: 1,
+            dragMode: 'move',
+            aspectRatio: 1 / 1,
+            restore: false,
+            guides: false,
+            center: false,
+            highlight: false,
+        });
+
+        this.init();
+    }
+
+    hide() {
+        this.card.css('visibility', 'hidden');
+    }
+    show() {
+        this.card.css('visibility', 'visible');
+    }
+
+    injectHTML($parent) {
+        $parent.append(this.html);
+    }
+
+    init() {
+        $('.close-button').click(this.hide.bind(this));
+        $('.set-button').click(this.save.bind(this));
+    }
+
+    async save() {
+        const src = this.cropper.getCroppedCanvas().toDataURL();
+
+        await setStorageData({ 'src': src });
+
+        profile.update();
+        profilePitstop.update();
+
+        this.hide();
     }
 }
