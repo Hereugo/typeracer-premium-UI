@@ -6,7 +6,7 @@ This is a chrome extensions that allows you to modify your profile picture on **
 
 **Installation link:** https://chrome.google.com/webstore/detail/typeracer-premium-ui/chnlnfhfilgmkclladlkklihgimcpiip?hl=ru&authuser=0
 
-# Setup / Inst
+# Setup / Instructions
 * Install the extension from this [link](https://chrome.google.com/webstore/detail/typeracer-premium-ui/chnlnfhfilgmkclladlkklihgimcpiip?hl=ru&authuser=0)
 * Goto [typeracer](https://typeracer.com) and click on the default avatar picture.
 * Upload a new picture
